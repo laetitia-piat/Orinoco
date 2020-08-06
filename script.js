@@ -1,0 +1,1 @@
+xhr.open("GET", "http://localhost:3000/api/teddies",true)
