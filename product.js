@@ -1,6 +1,8 @@
-	/*btn.addEventListener('click', function(){
-  	localStorage.setItem ("id", id);
-  	location.href= 'product.html' ;*/
+/*const paramsString = window.location;
+var searchParams = new URLSearchParams(paramsString);
+const id = searchParams
+.get('id')*/
+
 fetch('http://localhost:3000/api/teddies/')
 .then(reponse => reponse.json())
 .then(reponse => {

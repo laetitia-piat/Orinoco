@@ -10,8 +10,10 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-
-
+}
+.card {
+	border-radius: 10px;
+	margin: 40px;
 }
 .card-title {
 	text-align: center;
@@ -19,4 +21,12 @@
 
 .card-text {
 	text-align: right;
+}
+
+button {
+
+}
+
+button a {
+	color: white;
 }
