@@ -9,11 +9,11 @@ fetch('http://localhost:3000/api/teddies/')
 	main.className = 'container'
 	reponse.forEach(teddy => {
 		const carte=document.createElement("div")
-		carte.className = 'card mb-3 col-10 col-md-3 col-lg-3';
+		carte.className = 'card mb-3 col-10 col-md-3 col-lg-3'
 		const titre=document.createElement("h3")
 		titre.className = 'card-title'
 		const image=document.createElement("img")
-		image.className = 'card-img-top';
+		image.className = 'card-img-top'
 		const prix=document.createElement("p")
 		prix.className = 'card-text'
 		const bouton=document.createElement("button")
