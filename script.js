@@ -1,13 +1,15 @@
-	/*btn.addEventListener('click', function(){
-  	localStorage.setItem ("id", id);
-  	location.href= 'product.html' ;*/
-fetch('http://localhost:3000/api/teddies/')
-.then(reponse => reponse.json())
+fetch('http://localhost:3000/api/teddies/') //appel de l'API
+.then(reponse => reponse.json()) //reponse en JSON
 .then(reponse => {
 	console.log(reponse)
-	const main = document.querySelector("main")
+	afficherTeddies(reponse)
+	})
+
+
+function afficherTeddies(teddies){
+	const main = document.querySelector("main") //localisation dans le document HTML
 	main.className = 'container'
-	reponse.forEach(teddy => {
+	teddies.forEach(teddy => { //boucle pour chaque teddy - creation de l'emplacement de chaque élément
 		const carte=document.createElement("div")
 		carte.className = 'card mb-3 col-10 col-md-3 col-lg-3'
 		const titre=document.createElement("h3")
@@ -32,4 +34,4 @@ fetch('http://localhost:3000/api/teddies/')
 		main.appendChild(carte)
 
 	})
-})
+}

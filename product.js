@@ -1,11 +1,12 @@
-fetch('http://localhost:3000/api/teddies/')
+const paramsString = window.location.search
+	var searchParams = new URLSearchParams(paramsString);
+	const id = searchParams.get('id')
+	console.log(id)
+
+fetch('http://localhost:3000/api/teddies/' + id)
 .then(reponse => reponse.json())
 .then(reponse => {
 	console.log(reponse)
-	const paramsString = window.location;
-	var searchParams = new URLSearchParams('http://localhost:3000/api/teddies/?id=');
-	const id = searchParams
-	.get('id')
 	const main = document.querySelector("main")
 	main.className = 'container'
 	const carte=document.createElement("div")
@@ -16,39 +17,33 @@ fetch('http://localhost:3000/api/teddies/')
 	description.className = 'card-text'
 	const image=document.createElement("img")
 	image.className = 'card-img-top';
+	const select=document.createElement("select")
+	const bouton=document.createElement("button")
+	bouton.className = 'btn btn-secondary'
 
-	titre.textContent = teddy.name
-	image.src = teddy.imageUrl
-	description.textContent = teddy.description
-
+	titre.textContent = reponse.name
+	image.src = reponse.imageUrl
+	description.textContent = reponse.description
+	reponse.colors.forEach(couleur =>{
+		const option=document.createElement("option")
+		option.textContent = couleur
+		select.appendChild(option)
+	})
+	bouton.textContent = "Ajouter au panier"
+	bouton.addEventListener('click', function(){
+  	localStorage.setItem ("id", id);
+  	location.href= 'basket.html' ;
+  	})
 	carte.appendChild(titre)
 	carte.appendChild(image)
 	carte.appendChild(description)
+	carte.appendChild(select)
+	carte.appendChild(bouton)
 	main.appendChild(carte)
 
-	/*reponse.forEach(teddy => {
-		const carte=document.createElement("div")
-		carte.className = 'card mb-3 col-10 col-md-3 col-lg-3';
-		const titre=document.createElement("h3")
-		titre.className = 'card-title'
-		const image=document.createElement("img")
-		image.className = 'card-img-top';
-		const prix=document.createElement("p")
-		prix.className = 'card-text'
-		const bouton=document.createElement("button")
-		bouton.className = 'btn btn-secondary'
-		const lien=document.createElement("a")
-		titre.textContent = teddy.name
-		image.src = teddy.imageUrl
-		prix.textContent = teddy.price/100 + " EUR "
-		lien.href = "product.html?id=" + teddy._id
-		lien.textContent = "Description"
-		carte.appendChild(titre)
-		carte.appendChild(image)
-		carte.appendChild(prix)
-		carte.appendChild(bouton)
-		bouton.appendChild(lien)
-		main.appendChild(carte)
+	})
 
-	})*/
-})
+
+
+
+
