@@ -2,6 +2,9 @@ const paramsString = window.location.search
 	var searchParams = new URLSearchParams(paramsString);
 	const id = searchParams.get('id')
 	console.log(id)
+if(!localStorage.getItem("panier")){
+	localStorage.setItem("panier",JSON.stringify([]))
+}
 
 fetch('http://localhost:3000/api/teddies/' + id)
 .then(reponse => reponse.json())
@@ -31,9 +34,12 @@ fetch('http://localhost:3000/api/teddies/' + id)
 	})
 	bouton.textContent = "Ajouter au panier"
 	bouton.addEventListener('click', function(){
-  	localStorage.setItem ("id", id);
-  	location.href= 'basket.html' ;
-  	})
+		const panier = JSON.parse(localStorage.getItem("panier"))
+		panier.push(reponse)
+  		localStorage.setItem ("panier", JSON.stringify(panier));
+  		location.href= 'basket.html' ;
+  		})
+
 	carte.appendChild(titre)
 	carte.appendChild(image)
 	carte.appendChild(description)

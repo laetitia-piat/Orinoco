@@ -1,28 +1,29 @@
-const paramsString = window.location.search
-	var searchParams = new URLSearchParams(paramsString);
-	const id = searchParams.get('id')
-
-const panier = localStorage.getItem ("id", id);
-panier
+fetch('http://localhost:3000/api/teddies/')
+const panier = JSON.parse(localStorage.getItem("panier"))
 console.log(panier)
+const panierTableau = document.querySelector("#panier-tableau")
 
-/*fetch('http://localhost:3000/api/teddies/')
-.then(reponse => reponse.json())
-.then(reponse => {
-	const main = document.querySelector("main")
-	main.className = 'container'
-	const carte=document.createElement("div")
-	carte.className = 'card mb-3 col-10 col-md-3 col-lg-3';
-	const titre=document.createElement("h3")
-	titre.className = 'card-title'
-	const image=document.createElement("img")
-	image.className = 'card-img-top';
+panier.forEach(teddy => {
+	const nom=document.createElement("tr")
+	const photo=document.createElement("td")
+	photo.className = 'photo'
+	const photoTd=document.createElement("img")
+	photoTd.className = 'card-img'
+	const nomTd=document.createElement("td")
+	const descriptionTd=document.createElement("td")
+	descriptionTd.className = 'description'
+	const prixTd=document.createElement("td")
 
-	titre.textContent = reponse.name
-	image.src = reponse.imageUrl
+	photoTd.src = teddy.imageUrl
+	nomTd.textContent = teddy.name
+	descriptionTd.textContent = teddy.description
+	prixTd.textContent = teddy.price/100 + " EUR "
 
-	carte.appendChild(titre)
-	carte.appendChild(image)
-	main.appendChild(carte)
+	nom.appendChild(photo)
+	photo.appendChild(photoTd)
+	nom.appendChild(nomTd)
+	nom.appendChild(descriptionTd)
+	panierTableau.prepend(nom)
+	nom.appendChild(prixTd)
 
-})*/
+})

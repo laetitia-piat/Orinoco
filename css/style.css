@@ -25,11 +25,25 @@
 	text-align: right;
 }
 
-
 button a {
 	color: white;
 }
 button a:hover {
 	color: black;
 	text-decoration: none; 
+}
+
+/*panier*/
+
+.photo {
+	max-width: 250px;
+}
+.description {
+	max-width: 500px;
+}
+th {
+	padding: 0 20px;
+}
+td {
+	padding: 10px 20px;
 }
