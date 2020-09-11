@@ -5,11 +5,13 @@ fetch('http://localhost:3000/api/teddies/') //appel de l'API
 	afficherTeddies(reponse)
 	})
 
-
+//CREATION DE LA FONCTION "AFFICHERTEDDIES"
 function afficherTeddies(teddies){
-	const main = document.querySelector("main") //localisation dans le document HTML
+	const main = document.querySelector("main") //LOCALISATION DANS LE DOCUMENT HTML
 	main.className = 'container'
-	teddies.forEach(teddy => { //boucle pour chaque teddy - creation de l'emplacement de chaque élément
+	teddies.forEach(teddy => { 
+
+	//BOUCLE POUR CHAQUE TEDDY - CREATION DE L'EMPLACEMENT DE CHAQUE ELEMENT
 		const carte=document.createElement("div")
 		carte.className = 'card mb-3 col-10 col-md-3 col-lg-3'
 		const titre=document.createElement("h3")
@@ -21,11 +23,15 @@ function afficherTeddies(teddies){
 		const bouton=document.createElement("button")
 		bouton.className = 'btn btn-secondary'
 		const lien=document.createElement("a")
+
+	//CREATION DU CONTENU DES ELEMENTS
 		titre.textContent = teddy.name
 		image.src = teddy.imageUrl
 		prix.textContent = teddy.price/100 + " EUR "
 		lien.href = "product.html?id=" + teddy._id
 		lien.textContent = "Description"
+
+	//MISE EN PLACE DE CHAQUES ELEMENTS
 		carte.appendChild(titre)
 		carte.appendChild(image)
 		carte.appendChild(prix)

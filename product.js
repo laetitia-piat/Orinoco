@@ -2,14 +2,19 @@ const paramsString = window.location.search
 	var searchParams = new URLSearchParams(paramsString);
 	const id = searchParams.get('id')
 	console.log(id)
+
+	// CREATION DU STOCKAGE DANS LE LOCAL STORAGE
 if(!localStorage.getItem("panier")){
 	localStorage.setItem("panier",JSON.stringify([]))
 }
 
+	//APPEL DE L'API POUR UN SEUL TEDDY 
 fetch('http://localhost:3000/api/teddies/' + id)
 .then(reponse => reponse.json())
 .then(reponse => {
 	console.log(reponse)
+
+	//CREATION DE L'EMPLACEMENT POUR LE TEDDY SELECTIONNÉ
 	const main = document.querySelector("main")
 	main.className = 'container'
 	const carte=document.createElement("div")
@@ -24,22 +29,28 @@ fetch('http://localhost:3000/api/teddies/' + id)
 	const bouton=document.createElement("button")
 	bouton.className = 'btn btn-secondary'
 
+	//CREATION DU CONTENU DE L'ELEMENT SELECTIONNÉ
 	titre.textContent = reponse.name
 	image.src = reponse.imageUrl
 	description.textContent = reponse.description
+
+	//CREATION DU MENU DEROULANT POUR CHOIX D'OPTION AVEC LA BOUCLE FOREACH
 	reponse.colors.forEach(couleur =>{
 		const option=document.createElement("option")
 		option.textContent = couleur
 		select.appendChild(option)
 	})
+
+	//CREATION DU BOUTON POUR L'AJOUT AU PANIER AVEC LE LOCALSTORAGE ET LA GESTION D'EVENEMENT "ADDEVENTLISTENER"
 	bouton.textContent = "Ajouter au panier"
 	bouton.addEventListener('click', function(){
 		const panier = JSON.parse(localStorage.getItem("panier"))
 		panier.push(reponse)
-  		localStorage.setItem ("panier", JSON.stringify(panier));
+  		localStorage.setItem ("panier", JSON.stringify(panier)); 
   		location.href= 'basket.html' ;
   		})
-
+	
+	//MISE EN PLACE DE CHAQUES ELEMENTS
 	carte.appendChild(titre)
 	carte.appendChild(image)
 	carte.appendChild(description)
