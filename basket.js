@@ -15,12 +15,13 @@ panier.forEach(teddy => {
 	const descriptionTd=document.createElement("td")
 	descriptionTd.className = 'description'
 	const prixTd=document.createElement("td")
+	totalPrice += teddy.price/100
 
 //CREATION DU CONTENU DE L'ELEMENT MIS AU PANIER
 	photoTd.src = teddy.imageUrl
 	nomTd.textContent = teddy.name
 	descriptionTd.textContent = teddy.description
-	prixTd.textContent = teddy.price/100
+	prixTd.textContent = teddy.price/100 + " EUR "
 
 //MISE EN PLACE DE CHAQUES ELEMENTS DU PANIER
 	nom.appendChild(photo)
@@ -31,19 +32,8 @@ panier.forEach(teddy => {
 	panierTableau.prepend(nom)
 })
 
-function panierTotal() {
-	const total = document.getElementsByClassName('total')
-	const totalP=document.createElement("p")
-	total.appendChild(totalP)
-	panierTableau.prepend(total)
-	totalP.textContent = "Total : " + (panierTotal)  + " EUR "
-	const result = totalPrice+=prixTd
-	console.log(panierTotal)
-	}
-
-	/*const total=document.createElement("tr")
-	total.className = 'total'
-	const totalPanier=document.createElement("td")
-	totalPanier.className = 'total-panier'*/
-
-	
+//AFFICHAGE DU PRIX TOTAL
+const total = document.querySelector(".total")
+const totalP= document.createElement('h4')
+totalP.textContent =  " TOTAL : " + totalPrice + " EUROS "
+total.appendChild(totalP)

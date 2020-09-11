@@ -49,6 +49,9 @@ td {
 	padding: 10px 20px;
 	border : 1px solid grey;
 }
+.total h4 {
+	text-align: center;
+}
 
 /*---FORMULAIRE---*/
 #formulaire {
