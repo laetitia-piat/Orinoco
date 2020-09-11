@@ -28,10 +28,58 @@
 			</thead>
 			<tbody id="panier-tableau">
 				<tr>
-					<td>Total</td>
+					<td class="total" colspan="4"> </td>
 				</tr>
 			</tbody>
 		</table>
+<!--DEBUT DE FORMULAIRE -->
+		<div id="formulaire" class="card border-dark form-container shadow my-3">
+	        <div class="card-header text-center">
+	          	<h3>Pour valider votre commande</h3>
+	        </div>
+	        <div class="card-body">
+	          	<form class="form">
+	            	<div class="form-row my-3">
+	              		<label for="lastName" class="col-md-1 col-form-label">Nom</label>
+	              		<div class="col-md-5">
+	                		<input type="text" class="form-control" id="lastName" placeholder="Nom" required/>
+	              		</div>
+	              		<label for="firstName" class="col-md-1 col-form-label">Prénom</label>
+	             		<div class="col-md-5">
+	                		<input type="text" class="form-control" id="firstName" placeholder="Prénom" required/>
+	            		</div>
+	           		</div>
+	           		<div class="form-row my-3">
+	              		<label for="inputEmail" class="col-md-1 col-form-label">Email</label>
+	              		<div class="col-md-5">
+	                		<input type="email" class="form-control" id="inputEmail" placeholder="xxx@yyy.zzz" required/>
+	              		</div>
+	              		<label for="telephoneNumber" class="col-md-1 col-form-label">Tel</label>
+	              		<div class="col-md-5">
+	                		<input type="tel" maxlength="10" class="form-control" id="telephoneNumber" placeholder="0000000000" required/>
+	              		</div>
+	            	</div>
+	            	<div class="form-row my-3">
+	              		<label for="inputAddress" class="col-md-1 col-form-label">Adresse</label>
+	              		<div class="col-md-4">
+	               			<input type="text" class="form-control" id="inputAddress" placeholder="1 avenue des Champs Elysés" required/>
+	              		</div>
+	              		<label for="inputCity" class="col-md-1 col-form-label">Ville</label>
+	              		<div class="col-md-2">
+	                		<input type="text" class="form-control" id="inputCity" placeholder="Paris" required />
+	              		</div>
+	              		<label for="inputZip" class="col-md-2 col-form-label">Code Postal</label>
+	              		<div class="col-md-2">
+	                		<input type="text" class="form-control" id="inputZip" placeholder="75000" required/>
+	              		</div>
+	           		</div>
+	            	<div class="text-center">
+	              		<button class="btn btn-secondary order-submit">Soumettre mes informations</button>
+	            	</div>
+	          	</form>
+	        </div>
+      	</div>
+    	<a href="confirm.html" class="btn btn-primary col-6 offset-3 col-md-4 offset-md-4 my-4 disabled">Valider la commande</a>
 	</main>
 
 <script type="text/javascript" src="basket.js"></script>

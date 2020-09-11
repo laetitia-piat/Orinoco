@@ -34,7 +34,9 @@ button a:hover {
 }
 
 /*panier*/
-
+table {
+	margin: auto;
+}
 .photo {
 	max-width: 250px;
 }
@@ -43,7 +45,15 @@ button a:hover {
 }
 th {
 	padding: 0 20px;
+	border : 1px solid grey;
 }
 td {
 	padding: 10px 20px;
+	border : 1px solid grey;
+}
+
+
+/*formulaire*/
+#formulaire {
+	margin: auto;
 }
