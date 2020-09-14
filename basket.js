@@ -1,3 +1,13 @@
+const paramsString = window.location.search
+	var searchParams = new URLSearchParams(paramsString);
+	const prix = searchParams.get('prix')
+	console.log(prix)
+
+	// CREATION DU STOCKAGE DANS LE LOCAL STORAGE
+if(!localStorage.getItem("prix")){
+	localStorage.setItem("prix",JSON.stringify(prix))
+}
+
 fetch('http://localhost:3000/api/teddies/') //APPEL DE L'APUI
 const panier = JSON.parse(localStorage.getItem("panier")) //RECUPERATION DU LOCALSTORAGE 
 console.log(panier)
@@ -37,3 +47,25 @@ const total = document.querySelector(".total")
 const totalP= document.createElement('h4')
 totalP.textContent =  " TOTAL : " + totalPrice + " EUROS "
 total.appendChild(totalP)
+
+//BOUTON VALIDATION DE COMMANDE 
+const commande = document.querySelector("#formulaire")
+const divValid = document.createElement('div')
+divValid.className = ('text-center')
+const valid = document.createElement('button')
+valid.className = 'btn btn-primary order-submit'
+const lien=document.createElement("a")
+
+lien.href = "confirm.html"
+lien.textContent = "Valider ma commande"
+
+commande.appendChild(divValid)
+divValid.appendChild(valid)
+valid.appendChild(lien)
+
+valid.addEventListener('click', function(){
+	totalPrice = JSON.parse(localStorage.getItem("totalPrice"))
+	totalPrice.push(reponse)
+  	localStorage.setItem ("totalPrice", JSON.stringify(totalPrice)); 
+  	location.href= 'confirm.html' ;
+  	})
