@@ -57,3 +57,16 @@ td {
 #formulaire {
 	margin: auto;
 }
+
+/*---CONFIRMATION---*/
+.text-center {
+	max-width: 450px;
+	margin: auto;
+	}
+.text-center h4 {
+	padding-top: 15px;
+}
+.text-center p {
+	padding-top: 10px;
+	font-size: 20px;
+}
