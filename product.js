@@ -32,7 +32,8 @@ fetch('http://localhost:3000/api/teddies/' + id)
 	const main = document.querySelector("main")
 	main.className = 'container'
 	const carte=document.createElement("div")
-	carte.className = 'card mb-3 col-10 col-md-3 col-lg-3';
+	carte.setAttribute("id", "carte");
+	carte.className = 'card col-10 col-md-6 col-lg-6';
 	const titre=document.createElement("h3")
 	titre.className = 'card-title'
 	const description=document.createElement("p")

@@ -17,7 +17,8 @@ const paramsString = window.location.search
 const main = document.querySelector("main")
 main.className = 'container-fluid'
 const carte=document.createElement("div")
-carte.className = 'card mb-3 col-10 col-md-3 col-lg-3';
+carte.setAttribute("id", "carte-confirmation");
+carte.className = 'card mb-3 col-10 col-md-6 col-lg-6';
 const nom = document.createElement ("h3")
 nom.className = 'card-title'
 const confirmation = document.createElement("h4")
@@ -26,8 +27,8 @@ const commande = document.createElement("p")
 const numeroCommande = orderId
 
 nom.textContent = order.firstName + "  " +  order.lastName 
-confirmation.textContent = " Merci de votre commande d'un montant de " + totalPrice + " EUROS"
-commande.textContent = "Votre commande porte le numéro  " + numeroCommande
+confirmation.textContent = " Merci pour votre commande d'un montant de " + totalPrice + " EUROS." 
+commande.textContent = "Votre commande porte le numéro  " + numeroCommande + "."
 
 carte.appendChild(nom)
 carte.appendChild(confirmation)

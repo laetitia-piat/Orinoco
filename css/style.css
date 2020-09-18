@@ -30,6 +30,10 @@ button a:hover {
 	color: black;
 	text-decoration: none; 
 }
+/*--PAGE PRODUIT--*/
+#carte {
+	margin: auto;
+}
 
 /*---PANIER---*/
 table {
@@ -68,17 +72,21 @@ td {
 	margin: auto;
 	font-size: 20px;
 	background-color: #f3e9f1;
-
+}
 
 /*---CONFIRMATION---*/
-.text-center {
-	max-width: 450px;
+#carte-confirmation {
 	margin: auto;
-	}
-.text-center h4 {
+	margin-top: 50px;
+}
+#carte-confirmation h3 {
+	padding-top: 10px;
+}
+#carte-confirmation h4 {
 	padding-top: 15px;
 }
-.text-center p {
-	padding-top: 10px;
+
+#carte-confirmation p {
 	font-size: 20px;
+	padding-top: 20px;
 }
