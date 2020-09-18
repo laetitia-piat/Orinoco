@@ -4,7 +4,7 @@ const panier = JSON.parse(localStorage.getItem("panier")) //RECUPERATION DU LOCA
 //AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
 let nombrePanier= document.querySelector(".nombre-panier")
 let nombrePanierDepart = 0 //INITIALISATION DE LA VARIABLE A 0
-let nombrePanierTotal = [panier]
+let nombrePanierTotal = panier
 
 if(panier === null){
 	nombrePanier.textContent =  nombrePanierDepart;
@@ -12,7 +12,8 @@ if(panier === null){
 	nombrePanier.textContent =  nombrePanierTotal
 }
 
-fetch('http://localhost:3000/api/teddies/') //appel de l'API
+//APPEL DE L'API
+fetch('http://localhost:3000/api/teddies/') 
 .then(reponse => reponse.json()) //reponse en JSON
 .then(reponse => {
 	console.log(reponse)

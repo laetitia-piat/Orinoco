@@ -70,7 +70,6 @@ valid.addEventListener('submit', function(events){
 	contact.address = adresse
 	contact.city = ville
 
-
 	fetch('http://localhost:3000/api/teddies/order',{
 		method:'POST',
 		headers:{
@@ -86,13 +85,14 @@ valid.addEventListener('submit', function(events){
 	.then(reponse => {
 	console.log(reponse)
 	location.href= 'confirm.html?orderId='+reponse.orderId ;
+	localStorage.setItem('order',JSON.stringify(contact));
 	})
   	})
 
 //AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
 let nombrePanier= document.querySelector(".nombre-panier")
 let nombrePanierDepart = 0 //INITIALISATION DE LA VARIABLE A 0
-let nombrePanierTotal = [panier]
+let nombrePanierTotal = panier
 
 if(panier === 0){
 	nombrePanier.textContent =  nombrePanierDepart;

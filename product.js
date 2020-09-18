@@ -1,10 +1,10 @@
-//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
-const panier = JSON.parse(localStorage.getItem("panier")) //RECUPERATION DU LOCALSTORAGE 
+//RECUPERATION DU LOCALSTORAGE 
+const panier = JSON.parse(localStorage.getItem("panier")) 
 
 //AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
 let nombrePanier= document.querySelector(".nombre-panier")
 let nombrePanierDepart = 0 //INITIALISATION DE LA VARIABLE A 0
-let nombrePanierTotal = [panier]
+let nombrePanierTotal = panier
 
 if(panier === null){
 	nombrePanier.textContent =  nombrePanierDepart;
