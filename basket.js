@@ -1,21 +1,23 @@
-const paramsString = window.location.search
-	var searchParams = new URLSearchParams(paramsString);
-	const prix = searchParams.get('prix')
-	console.log(prix)
+fetch('http://localhost:3000/api/teddies/')
 
-	// CREATION DU STOCKAGE DANS LE LOCAL STORAGE
-if(!localStorage.getItem("prix")){
-	localStorage.setItem("prix",JSON.stringify(prix))
-}
-
-fetch('http://localhost:3000/api/teddies/') //APPEL DE L'APUI
-const panier = JSON.parse(localStorage.getItem("panier")) //RECUPERATION DU LOCALSTORAGE 
+const panier = JSON.parse(localStorage.getItem("panier")) //RECUPERATION DU LOCALSTORAGE
 console.log(panier)
-let totalPrice = 0
+const main = document.querySelector("main")
+let totalPrice = 0 //INITIALISATION DE LA VARIABLE TOTALPRICE A 0
 const panierTableau = document.querySelector("#panier-tableau")
+const products=[]
 
+if (panier == null) {
+//MESSAGE EN CAS DE PANIER VIDE
+ 	main.innerHTML = '<h2 class="font-italic col-12 text-center">Votre panier est vide!</h2>';
+  	let tableContainer = document.querySelector("table");
+  	tableContainer.classList.add("d-none")
+  	let formContainer = document.querySelector(".form-container");
+  	formContainer.classList.add("d-none");
+} else {
 //BOUCLE POUR CHAQUE TEDDY - CREATION DE L'EMPLACEMENT DE CHAQUE ELEMENT MIS AU PANIER
 panier.forEach(teddy => {
+	products.push(teddy._id)
 	const nom=document.createElement("tr")
 	const photo=document.createElement("td")
 	photo.className = 'photo'
@@ -41,31 +43,60 @@ panier.forEach(teddy => {
 	nom.appendChild(prixTd)
 	panierTableau.prepend(nom)
 })
+}
 
+//STOCKAGE DU PRIX TOTAL DANS LE LOCALSTORAGE POUR PAGE DE CONFIRMATION
+totalCost= localStorage.setItem("totalPrice", JSON.parse(totalPrice));
+totalCost = parseInt(totalPrice);
 //AFFICHAGE DU PRIX TOTAL
 const total = document.querySelector(".total")
 const totalP= document.createElement('h4')
 totalP.textContent =  " TOTAL : " + totalPrice + " EUROS "
 total.appendChild(totalP)
 
-//BOUTON VALIDATION DE COMMANDE 
-const commande = document.querySelector("#formulaire")
-const divValid = document.createElement('div')
-divValid.className = ('text-center')
-const valid = document.createElement('button')
-valid.className = 'btn btn-primary order-submit'
-const lien=document.createElement("a")
+const valid = document.getElementById('form')
+valid.addEventListener('submit', function(events){
+	events.preventDefault()
+	const contact = {}
+	const nom = document.getElementById('lastName').value
+	const prenom = document.getElementById('firstName').value
+	const email = document.getElementById('inputEmail').value
+	const adresse = document.getElementById('inputAddress').value
+	const ville = document.getElementById('inputCity').value
 
-lien.href = "confirm.html"
-lien.textContent = "Valider ma commande"
+	contact.lastName = nom
+	contact.firstName = prenom
+	contact.email = email
+	contact.address = adresse
+	contact.city = ville
 
-commande.appendChild(divValid)
-divValid.appendChild(valid)
-valid.appendChild(lien)
 
-valid.addEventListener('click', function(){
-	totalPrice = JSON.parse(localStorage.getItem("totalPrice"))
-	totalPrice.push(reponse)
-  	localStorage.setItem ("totalPrice", JSON.stringify(totalPrice)); 
-  	location.href= 'confirm.html' ;
+	fetch('http://localhost:3000/api/teddies/order',{
+		method:'POST',
+		headers:{
+			'Accept': 'application/json',
+      		'Content-Type': 'application/json'
+		},
+		body:JSON.stringify({
+			products:products, 
+			contact:contact
+		})
+	})
+	.then(reponse => reponse.json()) //reponse en JSON
+	.then(reponse => {
+	console.log(reponse)
+	location.href= 'confirm.html?orderId='+reponse.orderId ;
+	})
   	})
+
+//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
+let nombrePanier= document.querySelector(".nombre-panier")
+let nombrePanierDepart = 0 //INITIALISATION DE LA VARIABLE A 0
+let nombrePanierTotal = [panier]
+
+if(panier === 0){
+	nombrePanier.textContent =  nombrePanierDepart;
+}else {
+	nombrePanier.textContent =  nombrePanierTotal
+}
+

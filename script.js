@@ -1,3 +1,17 @@
+//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
+const panier = JSON.parse(localStorage.getItem("panier")) //RECUPERATION DU LOCALSTORAGE 
+
+//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
+let nombrePanier= document.querySelector(".nombre-panier")
+let nombrePanierDepart = 0 //INITIALISATION DE LA VARIABLE A 0
+let nombrePanierTotal = [panier]
+
+if(panier === null){
+	nombrePanier.textContent =  nombrePanierDepart;
+}else {
+	nombrePanier.textContent =  nombrePanierTotal
+}
+
 fetch('http://localhost:3000/api/teddies/') //appel de l'API
 .then(reponse => reponse.json()) //reponse en JSON
 .then(reponse => {
@@ -37,7 +51,8 @@ function afficherTeddies(teddies){
 		carte.appendChild(prix)
 		carte.appendChild(bouton)
 		bouton.appendChild(lien)
-		main.appendChild(carte)
+		main.appendChild(carte)		
 
 	})
 }
+

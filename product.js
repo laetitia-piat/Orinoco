@@ -1,3 +1,17 @@
+//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
+const panier = JSON.parse(localStorage.getItem("panier")) //RECUPERATION DU LOCALSTORAGE 
+
+//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
+let nombrePanier= document.querySelector(".nombre-panier")
+let nombrePanierDepart = 0 //INITIALISATION DE LA VARIABLE A 0
+let nombrePanierTotal = [panier]
+
+if(panier === null){
+	nombrePanier.textContent =  nombrePanierDepart;
+}else {
+	nombrePanier.textContent =  nombrePanierTotal
+}
+
 const paramsString = window.location.search
 	var searchParams = new URLSearchParams(paramsString);
 	const id = searchParams.get('id')
@@ -59,8 +73,6 @@ fetch('http://localhost:3000/api/teddies/' + id)
 	main.appendChild(carte)
 
 	})
-
-
 
 
 

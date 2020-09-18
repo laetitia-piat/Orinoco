@@ -1,8 +1,16 @@
-fetch('http://localhost:3000/api/teddies/') //APPEL DE L'APUI
+//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
+let nombrePanierZero = 0 //INITIALISATION DE LA VARIABLE A 0
+const nombrePanier= document.querySelector(".nombre-panier")
+nombrePanier.textContent =  nombrePanierZero
 
-const total = JSON.parse(localStorage.getItem("total")) //RECUPERATION DU LOCALSTORAGE 
-console.log(total)
+//RECUPERATION DU LOCALSTORAGE
+const panier = JSON.parse(localStorage.getItem("panier")) 
+const totalPrice = JSON.parse(localStorage.getItem("totalPrice"))
 
+const paramsString = window.location.search
+	var searchParams = new URLSearchParams(paramsString);
+	const orderId = searchParams.get('orderId')
+	console.log(orderId)
 
 const main = document.querySelector("main")
 main.className = 'container-fluid'
@@ -10,13 +18,13 @@ const messageConfirm = document.createElement ("div")
 messageConfirm.className = 'text-center'
 const confirmation = document.createElement("h4")
 const commande = document.createElement("p")
-const numeroCommande = 2020+'TED'+'00000'
+const numeroCommande = orderId
 
-confirmation.textContent = "Merci de votre commande d'un montant total de" + total + " EUROS" 
-commande.textContent = "Votre commande porte le numéro  " + numeroCommande  + " À bientôt sur Orinoco.com"
+confirmation.textContent = "Merci de votre commande d'un montant de " + totalPrice + " EUROS"
+commande.textContent = "Votre commande porte le numéro  " + numeroCommande
 
 messageConfirm.appendChild(confirmation)
 messageConfirm.appendChild(commande)
 main.appendChild(messageConfirm)
 
-
+localStorage.clear(panier)

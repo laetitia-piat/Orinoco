@@ -55,8 +55,20 @@ td {
 
 /*---FORMULAIRE---*/
 #formulaire {
+	width: 800px;
 	margin: auto;
 }
+
+#formulaire .card-body {
+	font-size: 15px;
+}
+
+#bouton {
+	width: 200px;
+	margin: auto;
+	font-size: 20px;
+	background-color: #f3e9f1;
+
 
 /*---CONFIRMATION---*/
 .text-center {
