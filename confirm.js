@@ -1,19 +1,16 @@
-//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
-let nombrePanierZero = 0 //INITIALISATION DE LA VARIABLE A 0
-const nombrePanier= document.querySelector(".nombre-panier")
-nombrePanier.textContent =  nombrePanierZero
-
 //RECUPERATION DU LOCALSTORAGE
 const panier = JSON.parse(localStorage.getItem("panier")) 
 const totalPrice = JSON.parse(localStorage.getItem("totalPrice"))
 const order = JSON.parse(localStorage.getItem("order"))
 console.log(order)
 
+//RECUPERATION DE L'ELEMENT ORDERID
 const paramsString = window.location.search
-	var searchParams = new URLSearchParams(paramsString);
-	const orderId = searchParams.get('orderId')
-	console.log(orderId)
+var searchParams = new URLSearchParams(paramsString);
+const orderId = searchParams.get('orderId')
+console.log(orderId)
 
+//CREATION DU MESSAGE DE CONFIRMATION DE COMMANDE
 const main = document.querySelector("main")
 main.className = 'container-fluid'
 const carte=document.createElement("div")
@@ -35,4 +32,11 @@ carte.appendChild(confirmation)
 carte.appendChild(commande)
 main.appendChild(carte)
 
+//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
+let nombrePanierZero = 0 //INITIALISATION DE LA VARIABLE A 0
+const nombrePanier= document.querySelector(".nombre-panier")
+nombrePanier.textContent =  nombrePanierZero
+
+//
 localStorage.clear(panier)
+

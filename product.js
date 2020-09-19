@@ -1,17 +1,3 @@
-//RECUPERATION DU LOCALSTORAGE 
-const panier = JSON.parse(localStorage.getItem("panier")) 
-
-//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
-let nombrePanier= document.querySelector(".nombre-panier")
-let nombrePanierDepart = 0 //INITIALISATION DE LA VARIABLE A 0
-let nombrePanierTotal = panier
-
-if(panier === null){
-	nombrePanier.textContent =  nombrePanierDepart;
-}else {
-	nombrePanier.textContent =  nombrePanierTotal
-}
-
 const paramsString = window.location.search
 	var searchParams = new URLSearchParams(paramsString);
 	const id = searchParams.get('id')
@@ -49,6 +35,14 @@ fetch('http://localhost:3000/api/teddies/' + id)
 	image.src = reponse.imageUrl
 	description.textContent = reponse.description
 
+	//MISE EN PLACE DE CHAQUES ELEMENTS
+	carte.appendChild(titre)
+	carte.appendChild(image)
+	carte.appendChild(description)
+	carte.appendChild(select)
+	carte.appendChild(bouton)
+	main.appendChild(carte)
+
 	//CREATION DU MENU DEROULANT POUR CHOIX D'OPTION AVEC LA BOUCLE FOREACH
 	reponse.colors.forEach(couleur =>{
 		const option=document.createElement("option")
@@ -63,17 +57,19 @@ fetch('http://localhost:3000/api/teddies/' + id)
 		panier.push(reponse)
   		localStorage.setItem ("panier", JSON.stringify(panier)); 
   		location.href= 'basket.html' ;
-  		})
-	
-	//MISE EN PLACE DE CHAQUES ELEMENTS
-	carte.appendChild(titre)
-	carte.appendChild(image)
-	carte.appendChild(description)
-	carte.appendChild(select)
-	carte.appendChild(bouton)
-	main.appendChild(carte)
+  	})
+})
 
-	})
+//RECUPERATION DU LOCALSTORAGE 
+const panier = JSON.parse(localStorage.getItem("panier")) 
 
+//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
+let nombrePanier= document.querySelector(".nombre-panier")
+let nombrePanierDepart = 0 //INITIALISATION DE LA VARIABLE A 0
+let nombrePanierTotal = panier
 
-
+if(panier == null){
+	nombrePanier.textContent =  nombrePanierDepart
+}else {
+	nombrePanier.textContent =  nombrePanierTotal
+}

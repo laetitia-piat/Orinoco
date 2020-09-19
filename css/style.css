@@ -7,7 +7,6 @@
 	margin-right: 0px;
 	padding: 0px;
 }
-
 .container {
 	display: flex;
 	flex-direction: row;
@@ -21,22 +20,24 @@
 .card-title {
 	text-align: center;
 }
-
 .card-text {
 	text-align: right;
 }
-
 button a {
 	color: white;
 }
-
 button a:hover {
 	color: black;
 	text-decoration: none; 
 }
+
 /*--PAGE PRODUIT--*/
 #carte {
 	margin: auto;
+	margin-top: 20px;
+}
+#carte h3 {
+
 }
 
 /*---PANIER---*/
@@ -66,11 +67,9 @@ td {
 	width: 800px;
 	margin: auto;
 }
-
 #formulaire .card-body {
 	font-size: 15px;
 }
-
 #bouton {
 	width: 200px;
 	margin: auto;
