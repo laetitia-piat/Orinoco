@@ -1,22 +1,48 @@
-const paramsString = window.location.search
-	var searchParams = new URLSearchParams(paramsString);
-	const id = searchParams.get('id')
-	console.log(id)
-
 	// CREATION DU STOCKAGE DANS LE LOCAL STORAGE
 if(!localStorage.getItem("panier")){
 	localStorage.setItem("panier",JSON.stringify([]))
 }
 
+//RECUPERATION DU LOCALSTORAGE POUR LE PANIER
+const panier = JSON.parse(localStorage.getItem("panier")) 
+
+//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
+let nombrePanier= document.querySelector(".nombre-panier")
+console.log(panier.length)
+if(panier == null || panier.length <= 0 ){
+	nombrePanier.textContent =  0;
+}else {
+	nombrePanier.textContent =  panier.length
+}
+const main = document.querySelector("main")
+main.className = 'container'
+
+const paramsString = window.location.search
+	var searchParams = new URLSearchParams(paramsString);
+	const id = searchParams.get('id')
+	console.log(id)
+
 	//APPEL DE L'API POUR UN SEUL TEDDY 
 fetch('http://localhost:3000/api/teddies/' + id)
 .then(reponse => reponse.json())
 .then(reponse => {
+	afficherTeddies(reponse)
+})
+.catch(erreur =>{
+	afficherErreur()
+})
+function afficherErreur(){
+	const carte=document.createElement("div")
+	carte.className = 'card mb-3 col-8 col-md-8 col-lg-8'
+	carte.setAttribute("id", "erreur");
+	const messageErreur=document.createElement("h2")
+	messageErreur.textContent = "Le produit demandé n'est pas disponible à l'affichage, veuillez réessayer plus tard"
+	carte.appendChild(messageErreur)
+	main.appendChild(carte)
+}
+function afficherTeddies(reponse) {
 	console.log(reponse)
-
 	//CREATION DE L'EMPLACEMENT POUR LE TEDDY SELECTIONNÉ
-	const main = document.querySelector("main")
-	main.className = 'container'
 	const carte=document.createElement("div")
 	carte.setAttribute("id", "carte");
 	carte.className = 'card col-10 col-md-6 col-lg-6';
@@ -58,18 +84,4 @@ fetch('http://localhost:3000/api/teddies/' + id)
   		localStorage.setItem ("panier", JSON.stringify(panier)); 
   		location.href= 'basket.html' ;
   	})
-})
-
-//RECUPERATION DU LOCALSTORAGE 
-const panier = JSON.parse(localStorage.getItem("panier")) 
-
-//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
-let nombrePanier= document.querySelector(".nombre-panier")
-let nombrePanierDepart = 0 //INITIALISATION DE LA VARIABLE A 0
-let nombrePanierTotal = panier
-
-if(panier == null){
-	nombrePanier.textContent =  nombrePanierDepart
-}else {
-	nombrePanier.textContent =  nombrePanierTotal
 }

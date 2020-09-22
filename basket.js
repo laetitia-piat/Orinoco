@@ -2,6 +2,15 @@
 const panier = JSON.parse(localStorage.getItem("panier"))
 console.log(panier)
 
+//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
+let nombrePanier= document.querySelector(".nombre-panier")
+console.log(panier.length)
+if(panier == null || panier.length <= 0 ){
+	nombrePanier.textContent =  0;
+}else {
+	nombrePanier.textContent =  panier.length
+}
+
 const main = document.querySelector("main")
 const panierTableau = document.querySelector("#panier-tableau")
 const products=[]
@@ -16,34 +25,7 @@ if (panier == null) {
   	let formContainer = document.querySelector(".form-container");
   	formContainer.classList.add("d-none");
 } else {
-//BOUCLE POUR CHAQUE TEDDY - CREATION DE L'EMPLACEMENT DE CHAQUE ELEMENT MIS AU PANIER
-	panier.forEach(teddy => {
-		products.push(teddy._id)
-		const nom=document.createElement("tr")
-		const photo=document.createElement("td")
-		photo.className = 'photo'
-		const photoTd=document.createElement("img")
-		photoTd.className = 'card-img'
-		const nomTd=document.createElement("td")
-		const descriptionTd=document.createElement("td")
-		descriptionTd.className = 'description'
-		const prixTd=document.createElement("td")	
-		totalPrice += teddy.price/100
-
-	//CREATION DU CONTENU DE L'ELEMENT MIS AU PANIER
-		photoTd.src = teddy.imageUrl
-		nomTd.textContent = teddy.name
-		descriptionTd.textContent = teddy.description
-		prixTd.textContent = teddy.price/100 + " EUR "
-
-	//MISE EN PLACE DE CHAQUES ELEMENTS DU PANIER
-		nom.appendChild(photo)
-		photo.appendChild(photoTd)
-		nom.appendChild(nomTd)
-		nom.appendChild(descriptionTd)
-		nom.appendChild(prixTd)
-		panierTableau.prepend(nom)
-	})
+	afficherPanier()
 }
 
 //AFFICHAGE DU PRIX TOTAL
@@ -59,7 +41,44 @@ totalCost = parseInt(totalPrice);
 //CREATION DU BOUTON DE VALIDATION DU FORMULAIRE
 const valid = document.getElementById('form')
 valid.addEventListener('submit', function(events){
+
 	events.preventDefault()
+	creerContact()
+
+//ET ENVOI DU FORMULAIRE AU SERVEUR
+	commande()
+})
+
+function afficherPanier() {
+	//BOUCLE POUR CHAQUE TEDDY - CREATION DE L'EMPLACEMENT DE CHAQUE ELEMENT MIS AU PANIER
+	panier.forEach(teddy => {
+		products.push(teddy._id)
+		const nom=document.createElement("tr")
+		const photo=document.createElement("td")
+		photo.className = 'photo'
+		const photoTd=document.createElement("img")
+		photoTd.className = 'card-img'
+		const nomTd=document.createElement("td")
+		const descriptionTd=document.createElement("td")
+		descriptionTd.className = 'description'
+		const prixTd=document.createElement("td")	
+		totalPrice += teddy.price/100
+	//CREATION DU CONTENU DE L'ELEMENT MIS AU PANIER
+		photoTd.src = teddy.imageUrl
+		nomTd.textContent = teddy.name
+		descriptionTd.textContent = teddy.description
+		prixTd.textContent = teddy.price/100 + " EUR "
+	//MISE EN PLACE DE CHAQUES ELEMENTS DU PANIER
+		nom.appendChild(photo)
+		photo.appendChild(photoTd)
+		nom.appendChild(nomTd)
+		nom.appendChild(descriptionTd)
+		nom.appendChild(prixTd)
+		panierTableau.prepend(nom)
+	})
+}
+
+function creerContact() {
 	const contact = {}
 	const nom = document.getElementById('lastName').value
 	const prenom = document.getElementById('firstName').value
@@ -72,8 +91,9 @@ valid.addEventListener('submit', function(events){
 	contact.email = email
 	contact.address = adresse
 	contact.city = ville
+}
 
-//ET ENVOI DU FORMULAIRE AU SERVEUR
+function commande() {
 	fetch('http://localhost:3000/api/teddies/order',{
 		method:'POST',
 		headers:{
@@ -91,16 +111,4 @@ valid.addEventListener('submit', function(events){
 	location.href= 'confirm.html?orderId='+reponse.orderId ;
 	localStorage.setItem('order',JSON.stringify(contact));
 	})
-})
-
-//AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
-let nombrePanier= document.querySelector(".nombre-panier")
-let nombrePanierDepart = 0 //INITIALISATION DE LA VARIABLE A 0
-let nombrePanierTotal = panier
-
-if(panier == null){
-	nombrePanier.textContent =  nombrePanierDepart;
-}else {
-	nombrePanier.textContent =  nombrePanierTotal
 }
-

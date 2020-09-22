@@ -30,7 +30,13 @@ button a:hover {
 	color: black;
 	text-decoration: none; 
 }
-
+#erreur {
+	margin: auto;
+	margin-top: 100px;
+}
+#erreur h2 {
+	text-align: center;
+}
 /*--PAGE PRODUIT--*/
 #carte {
 	margin: auto;
