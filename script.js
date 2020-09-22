@@ -11,6 +11,8 @@ if(panier == null || panier.length <= 0 ){
 }
 const main = document.querySelector("main") //LOCALISATION DANS LE DOCUMENT HTML
 main.className = 'container'
+const rowCarte = document.createElement("div")
+rowCarte.className = 'row'
 
 //APPEL DE L'API
 fetch('http://localhost:3000/api/teddies/') 
@@ -38,7 +40,7 @@ function afficherTeddies(teddies){
 
 	//BOUCLE POUR CHAQUE TEDDY - CREATION DE L'EMPLACEMENT DE CHAQUE ELEMENT
 		const carte=document.createElement("div")
-		carte.className = 'card mb-3 col-10 col-md-3 col-lg-3'
+		carte.className = 'card mb-3 col-10 col-md-4 col-lg-3'
 		const titre=document.createElement("h3")
 		titre.className = 'card-title'
 		const image=document.createElement("img")
@@ -62,6 +64,7 @@ function afficherTeddies(teddies){
 		carte.appendChild(prix)
 		carte.appendChild(bouton)
 		bouton.appendChild(lien)
-		main.appendChild(carte)		
+		rowCarte.appendChild(carte)
+		main.appendChild(rowCarte)		
 	})
 }
