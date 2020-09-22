@@ -9,6 +9,8 @@ if(panier == null || panier.length <= 0 ){
 }else {
 	nombrePanier.textContent =  panier.length
 }
+
+//CONSTANTES GENERALES
 const main = document.querySelector("main") //LOCALISATION DANS LE DOCUMENT HTML
 main.className = 'container'
 const rowCarte = document.createElement("div")
@@ -24,6 +26,7 @@ fetch('http://localhost:3000/api/teddies/')
 	afficherErreur()
 })
 
+//FONCTION POUR L'AFFICHAGE DE L'ERREUR 
 function afficherErreur(){
 	const carte=document.createElement("div")
 	carte.className = 'card mb-3 col-8 col-md-8 col-lg-8'
@@ -34,10 +37,9 @@ function afficherErreur(){
 	main.appendChild(carte)
 }
 
-//CREATION DE LA FONCTION "AFFICHERTEDDIES"
+//FONCTION POUR L'AFFICHAGE DES 5 TEDDIES
 function afficherTeddies(teddies){
 	teddies.forEach(teddy => { 
-
 	//BOUCLE POUR CHAQUE TEDDY - CREATION DE L'EMPLACEMENT DE CHAQUE ELEMENT
 		const carte=document.createElement("div")
 		carte.className = 'card mb-3 col-10 col-md-4 col-lg-3'
@@ -50,14 +52,12 @@ function afficherTeddies(teddies){
 		const bouton=document.createElement("button")
 		bouton.className = 'btn btn-secondary'
 		const lien=document.createElement("a")
-
 	//CREATION DU CONTENU DES ELEMENTS
 		titre.textContent = teddy.name
 		image.src = teddy.imageUrl
 		prix.textContent = teddy.price/100 + " EUR "
 		lien.href = "product.html?id=" + teddy._id
 		lien.textContent = "Description"
-
 	//MISE EN PLACE DE CHAQUES ELEMENTS
 		carte.appendChild(titre)
 		carte.appendChild(image)

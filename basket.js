@@ -10,20 +10,21 @@ if(panier == null || panier.length <= 0 ){
 	nombrePanier.textContent =  panier.length
 }
 
+//CONSTANTES GENERALES
 const main = document.querySelector("main")
 const panierTableau = document.querySelector("#panier-tableau")
 const products=[]
 const contact = {}
-//INITIALISATION DE LA VARIABLE TOTALPRICE A 0
-let totalPrice = 0 
+let totalPrice = 0 //INITIALISATION DE LA VARIABLE TOTALPRICE A 0
 
-if (panier == null) {
 //MESSAGE EN CAS DE PANIER VIDE
+if (panier == null) {
  	main.innerHTML = '<h2 class="font-italic col-12 text-center">Votre panier est vide!</h2>';
   	let tableContainer = document.querySelector("table");
   	tableContainer.classList.add("d-none")
   	let formContainer = document.querySelector(".form-container");
   	formContainer.classList.add("d-none");
+//AFFICHAGE DU PANIER
 } else {
 	afficherPanier()
 }
@@ -47,8 +48,9 @@ valid.addEventListener('submit', function(events){
 	commande()
 })
 
+//FONCTION POUR L'AFFICHAGE DU PANIER
 function afficherPanier() {
-	//BOUCLE POUR CHAQUE TEDDY - CREATION DE L'EMPLACEMENT DE CHAQUE ELEMENT MIS AU PANIER
+	//BOUCLE POUR CHAQUE TEDDY - CREATION DE L'EMPLACEMENT DE CHAQUE ELEMENT
 	panier.forEach(teddy => {
 		products.push(teddy._id)
 		const nom=document.createElement("tr")
@@ -76,6 +78,7 @@ function afficherPanier() {
 	})
 }
 
+//FONCTION POUR LA CREATION DU FORMULAIRE
 function creerContact() {
 	const nom = document.getElementById('lastName').value
 	const prenom = document.getElementById('firstName').value
@@ -90,6 +93,7 @@ function creerContact() {
 	contact.city = ville
 }
 
+//FONCTION POUR L'ENVOI DES INFORMATIONS AU SERVEUR
 function commande() {
 	fetch('http://localhost:3000/api/teddies/order',{
 		method:'POST',
