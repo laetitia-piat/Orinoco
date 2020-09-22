@@ -4,7 +4,6 @@ console.log(panier)
 
 //AFFICHAGE DU NOMBRE DE PRODUIT DANS LE PANIER
 let nombrePanier= document.querySelector(".nombre-panier")
-console.log(panier.length)
 if(panier == null || panier.length <= 0 ){
 	nombrePanier.textContent =  0;
 }else {
@@ -14,6 +13,7 @@ if(panier == null || panier.length <= 0 ){
 const main = document.querySelector("main")
 const panierTableau = document.querySelector("#panier-tableau")
 const products=[]
+const contact = {}
 //INITIALISATION DE LA VARIABLE TOTALPRICE A 0
 let totalPrice = 0 
 
@@ -41,10 +41,8 @@ totalCost = parseInt(totalPrice);
 //CREATION DU BOUTON DE VALIDATION DU FORMULAIRE
 const valid = document.getElementById('form')
 valid.addEventListener('submit', function(events){
-
 	events.preventDefault()
 	creerContact()
-
 //ET ENVOI DU FORMULAIRE AU SERVEUR
 	commande()
 })
@@ -79,7 +77,6 @@ function afficherPanier() {
 }
 
 function creerContact() {
-	const contact = {}
 	const nom = document.getElementById('lastName').value
 	const prenom = document.getElementById('firstName').value
 	const email = document.getElementById('inputEmail').value
