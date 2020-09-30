@@ -51,13 +51,14 @@ button a:hover {
 	margin: auto;
 	margin-top: 20px;
 }
-#carte h3 {
-
-}
 
 /*---PANIER---*/
 table {
 	margin: auto;
+}
+#tableau {
+	margin-right: 0px;
+	margin-left: 0px;
 }
 .photo {
 	max-width: 250px;
